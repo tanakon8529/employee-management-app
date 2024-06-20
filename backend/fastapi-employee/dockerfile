@@ -1,0 +1,38 @@
+FROM python:3.12
+
+# Set environment variables
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+ENV TZ=Asia/Bangkok
+
+# Set work directory
+WORKDIR /app
+
+# Install prerequisites
+RUN apt-get update \
+ && apt-get install -y gnupg2
+
+# Install SQLite3
+RUN apt-get install -y sqlite3 libsqlite3-dev
+RUN mkdir -p /data
+RUN sqlite3 /data/fastapi-sqlite.db
+
+# Copy only the requirements.txt first to leverage Docker cache
+COPY ./share/requirements.txt /app/
+# install pyodbc (and, optionally, sqlalchemy)
+RUN python -m pip install --upgrade pip
+RUN pip install --trusted-host pypi.python.org pyodbc==5.1.0
+RUN pip install -r requirements.txt
+
+# Now copy the rest of your code
+COPY ./share/* .
+
+# Copy shared directories
+COPY ../share/settings/ ./settings/
+COPY ../share/core/ ./core/
+COPY ../share/utilities/ ./utilities/
+COPY ../share/middlewares/ ./middlewares/
+
+
+# Copy project
+COPY ./fastapi-employee .
