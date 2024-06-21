@@ -44,12 +44,21 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-buildx-
 
+    - name: Copy environment files
+      run: |
+        cp .env.development .env
+        cp docker-compose.development.yml docker-compose.yml
+
+    - name: Export environment variables
+      run: |
+        export $(cat .env | grep -v ^# | xargs)
+
     - name: Build and push
       env:
         DOCKER_BUILDKIT: 1
         COMPOSE_DOCKER_CLI_BUILD: 1
       run: |
-        docker-compose -f docker-compose.development.yml up --build -d
+        docker-compose up --build -d
 
     - name: Install dependencies
       run: |
