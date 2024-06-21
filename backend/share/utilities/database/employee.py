@@ -5,6 +5,7 @@ from typing import Optional
 from core.db_core import Employee
 from utilities.log_controler import LogControler
 from utilities.hash_controler import hash_password, verify_password
+from utilities.time_controler import get_current_date
 
 log_controler = LogControler()
 
@@ -33,7 +34,7 @@ def replace_password_none(data):
 def create_employee_table(data, db_session):
     result = {"error_server": "00", "msg": "Server error"}
     try:
-        hashed_password = hash_password(data.Password)
+        hashed_password = hash_password(data.password)
 
         payload_Employee = Employee(
             username=data.username,
@@ -43,7 +44,9 @@ def create_employee_table(data, db_session):
             address=data.address,
             manager_id=data.manager_id,
             image=data.image,
-            state_id=data.state_id
+            state_id=data.state_id,
+            created_at=get_current_date(),
+            updated_at=None
         )
         db_session.add(payload_Employee)
         db_session.flush()
@@ -66,6 +69,7 @@ def update_employee_table_by_id(data, db_session):
         payload_Employee.manager_id = data.manager_id
         payload_Employee.image = data.image
         payload_Employee.state_id = data.state_id
+        payload_Employee.updated_at = get_current_date()
         db_session.flush()
         result = {"detail": "Employee updated successfully", "data": Employee_Base(**payload_Employee.__dict__)}
         # replace password none, return without password
@@ -129,7 +133,6 @@ def read_employee_table_by_condition(data, db_session):
                 query = query.filter(Employee.updated_at == data.updated_at)
 
         payload_Employee = query.all()
-        print(payload_Employee)
 
         if payload_Employee:
             result = {

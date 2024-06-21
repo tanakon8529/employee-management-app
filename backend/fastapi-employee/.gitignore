@@ -8,10 +8,6 @@ core/*
 settings/*
 utilities/*
 
-# share in fastapi-staff_tranfer and fastapi-sqlite
-apis/*
-routes/*
-
 # Environments
 .env
 .venv
