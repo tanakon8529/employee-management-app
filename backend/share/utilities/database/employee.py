@@ -63,6 +63,9 @@ def update_employee_table_by_id(data, db_session):
     result = {"error_server": "00", "msg": "Server error"}
     try:
         payload_Employee = db_session.query(Employee).filter(Employee.id == data.id).first()
+        if not payload_Employee:
+            return {"error_server": "01", "msg": "Employee not found"}
+        
         payload_Employee.name = data.name
         payload_Employee.position_id = data.position_id
         payload_Employee.address = data.address
@@ -84,6 +87,9 @@ def delete_employee_table_by_id(data, db_session):
     result = {"error_server": "00", "msg": "Server error"}
     try:
         payload_Employee = db_session.query(Employee).filter(Employee.id == data.id).first()
+        if not payload_Employee:
+            return {"error_server": "01", "msg": "Employee not found"}
+        
         db_session.delete(payload_Employee)
         db_session.flush()
         result = {"detail": "Employee deleted successfully", "data": Employee_Base(**payload_Employee.__dict__)}
