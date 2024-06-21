@@ -1,0 +1,599 @@
+{
+	"info": {
+		"_postman_id": "4eef3fc9-d4f5-4832-af10-f3bd41bc8012",
+		"name": "employee-management-app",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20136183"
+	},
+	"item": [
+		{
+			"name": "Oauth2",
+			"item": [
+				{
+					"name": "Genarate Token",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "client-id",
+								"value": "{{client-id}}",
+								"type": "text"
+							},
+							{
+								"key": "client-secret",
+								"value": "{{client-secret}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{API_OAUTH}}v1/token/",
+							"host": [
+								"{{API_OAUTH}}v1"
+							],
+							"path": [
+								"token",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Protected Token",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{API_OAUTH}}v1/protected/",
+							"host": [
+								"{{API_OAUTH}}v1"
+							],
+							"path": [
+								"protected",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Employee",
+			"item": [
+				{
+					"name": "Get Employee",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{API_EMPLOYEE}}v1/",
+							"host": [
+								"{{API_EMPLOYEE}}v1"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Signin Employee",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"test\",\n    \"password\": \"test\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_EMPLOYEE}}v1/",
+							"host": [
+								"{{API_EMPLOYEE}}v1"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post Employee",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"test\",\n    \"password\": \"test\",\n    \"name\": \"testman\",\n    \"position_id\": 1,\n    \"address\": \"testaddress\",\n    \"manager_id\": 1,\n    \"image\": \"image,jpg\",\n    \"state_id\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_EMPLOYEE}}v1/",
+							"host": [
+								"{{API_EMPLOYEE}}v1"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Put Employee",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 5,\n    \"username\": \"test\",\n    \"password\": \"test\",\n    \"name\": \"Edit_testman\",\n    \"position_id\": 1,\n    \"address\": \"testaddress\",\n    \"manager_id\": 1,\n    \"image\": \"image,jpg\",\n    \"state_id\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_EMPLOYEE}}v1/",
+							"host": [
+								"{{API_EMPLOYEE}}v1"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Employee",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 5\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_EMPLOYEE}}v1/",
+							"host": [
+								"{{API_EMPLOYEE}}v1"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Position",
+			"item": [
+				{
+					"name": "Get Position",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{API_POSITION}}v1/",
+							"host": [
+								"{{API_POSITION}}v1"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post Position",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "\n{\n    \"name\": \"CTO\",\n    \"details\": \"Chief Technology Officer\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_POSITION}}v1/",
+							"host": [
+								"{{API_POSITION}}v1"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Put Position",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "\n{\n    \"id\": 7,\n    \"name\": \"CTO_edit\",\n    \"details\": \"Chief Technology Officer\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_POSITION}}v1/",
+							"host": [
+								"{{API_POSITION}}v1"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Position",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 7\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_POSITION}}v1/",
+							"host": [
+								"{{API_POSITION}}v1"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "State",
+			"item": [
+				{
+					"name": "Get State",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{API_State}}v1/",
+							"host": [
+								"{{API_State}}v1"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post State",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "\n{\n    \"name\": \"Suspended\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_State}}v1/",
+							"host": [
+								"{{API_State}}v1"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Put State",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "\n{\n    \"id\": 3,\n    \"name\": \"Edit Suspended\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_State}}v1/",
+							"host": [
+								"{{API_State}}v1"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete State",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 3\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_State}}v1/",
+							"host": [
+								"{{API_State}}v1"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Department",
+			"item": [
+				{
+					"name": "Get Department",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{API_DEPARTMENT}}v1/",
+							"host": [
+								"{{API_DEPARTMENT}}v1"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post Department",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Marketing Department\",\n    \"manager_id\": 4\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_DEPARTMENT}}v1/",
+							"host": [
+								"{{API_DEPARTMENT}}v1"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Put Department",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 4,\n    \"name\": \"Edit Marketing Department\",\n    \"manager_id\": 4\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_DEPARTMENT}}v1/",
+							"host": [
+								"{{API_DEPARTMENT}}v1"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Department",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 4\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_DEPARTMENT}}v1/",
+							"host": [
+								"{{API_DEPARTMENT}}v1"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
