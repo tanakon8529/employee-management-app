@@ -1,24 +1,3 @@
-"""
-***********************************************************************
-* Company: Q-FREE (Thailand) Co., Ltd.
-* 
-* Initial by:
-*   Name: Tanakon Kabprapun
-*   Email: tanakon.kabprapun@q-free.com
-*
-* Developers:
-*   - Tanakon Kabprapun
-*   - [Other Developer Name]
-*   - [Additional Developer Name]
-*   ... (and so on)
-*
-* Description:
-*   [Brief description of the file's purpose or the code it contains]
-*
-* Created at: 2024-01-01 00:00:00
-*
-***********************************************************************
-"""
 
 from contextvars import ContextVar
 from typing import Dict, Optional, Union
