@@ -38,6 +38,57 @@ services:
       - traefik.http.routers.fastapi-employee.rule=Host(`${HOST}`) && PathPrefix(`${API_PATH_FASTAPI_EMPLOYEE}`)      
       - traefik.http.routers.fastapi-employee.entrypoints=web
     command: uvicorn main:app --host 0.0.0.0 --port $PORT_FASTAPI_EMPLOYEE
+  fastapi-position:
+    build:
+      context: ./backend
+      dockerfile: fastapi-position/Dockerfile
+    ports:
+      - '${PORT_FASTAPI_POSITION}:${PORT_FASTAPI_POSITION}'
+    volumes:
+      - ./backend/fastapi-position/logs:/app/fastapi-position/logs/
+    env_file:
+      - ./.env
+    networks:
+      - web
+    labels:      
+      - traefik.enable=true      
+      - traefik.http.routers.fastapi-position.rule=Host(`${HOST}`) && PathPrefix(`${API_PATH_FASTAPI_POSITION}`)      
+      - traefik.http.routers.fastapi-position.entrypoints=web
+    command: uvicorn main:app --host 0.0.0.0 --port $PORT_FASTAPI_POSITION
+  fastapi-department:
+    build:
+      context: ./backend
+      dockerfile: fastapi-department/Dockerfile
+    ports:
+      - '${PORT_FASTAPI_DEPARTMENT}:${PORT_FASTAPI_DEPARTMENT}'
+    volumes:
+      - ./backend/fastapi-department/logs:/app/fastapi-department/logs/
+    env_file:
+      - ./.env
+    networks:
+      - web
+    labels:      
+      - traefik.enable=true      
+      - traefik.http.routers.fastapi-department.rule=Host(`${HOST}`) && PathPrefix(`${API_PATH_FASTAPI_DEPARTMENT}`)      
+      - traefik.http.routers.fastapi-department.entrypoints=web
+    command: uvicorn main:app --host 0.0.0.0 --port $PORT_FASTAPI_DEPARTMENT
+  fastapi-state:
+    build:
+      context: ./backend
+      dockerfile: fastapi-state/Dockerfile
+    ports:
+      - '${PORT_FASTAPI_STATE}:${PORT_FASTAPI_STATE}'
+    volumes:
+      - ./backend/fastapi-state/logs:/app/fastapi-state/logs/
+    env_file:
+      - ./.env
+    networks:
+      - web
+    labels:      
+      - traefik.enable=true      
+      - traefik.http.routers.fastapi-state.rule=Host(`${HOST}`) && PathPrefix(`${API_PATH_FASTAPI_STATE}`)      
+      - traefik.http.routers.fastapi-state.entrypoints=web
+    command: uvicorn main:app --host 0.0.0.0 --port $PORT_FASTAPI_STATE
 
   ##########################################################################################
   ### Redis 7.2-alpine db 0
